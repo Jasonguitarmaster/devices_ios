@@ -1,17 +1,11 @@
 devices.onGamepadButton(MesDpadButtonInfo.AUp, function () {
     Stop()
 })
-function Left () {
-    pins.digitalWritePin(DigitalPin.P8, 1)
-    pins.digitalWritePin(DigitalPin.P2, 1)
-    pins.analogWritePin(AnalogPin.P14, speed * -1)
-    pins.analogWritePin(AnalogPin.P13, speed)
-}
 devices.onGamepadButton(MesDpadButtonInfo.BUp, function () {
     Stop()
 })
 devices.onGamepadButton(MesDpadButtonInfo.DDown, function () {
-    Right()
+	
 })
 bluetooth.onBluetoothConnected(function () {
     basic.showIcon(IconNames.Heart)
@@ -23,10 +17,12 @@ devices.onGamepadButton(MesDpadButtonInfo.DUp, function () {
     Stop()
 })
 function Back () {
+    L_Wheel = 1
+    R_Wheel = 1
     pins.digitalWritePin(DigitalPin.P8, 1)
     pins.digitalWritePin(DigitalPin.P2, 1)
-    pins.analogWritePin(AnalogPin.P14, 512)
-    pins.analogWritePin(AnalogPin.P13, 512)
+    pins.digitalWritePin(DigitalPin.P14, L_Wheel)
+    pins.digitalWritePin(DigitalPin.P13, R_Wheel)
 }
 devices.onGamepadButton(MesDpadButtonInfo.CUp, function () {
     Stop()
@@ -38,25 +34,23 @@ devices.onGamepadButton(MesDpadButtonInfo.ADown, function () {
     Go()
 })
 function Go () {
+    L_Wheel = 0
+    R_Wheel = 0
     pins.digitalWritePin(DigitalPin.P8, 1)
     pins.digitalWritePin(DigitalPin.P2, 1)
-    pins.analogWritePin(AnalogPin.P14, 0)
-    pins.analogWritePin(AnalogPin.P13, 0)
+    pins.digitalWritePin(DigitalPin.P14, L_Wheel)
+    pins.digitalWritePin(DigitalPin.P13, R_Wheel)
 }
 devices.onGamepadButton(MesDpadButtonInfo.CDown, function () {
-    Left()
+	
 })
-function Right () {
-    pins.digitalWritePin(DigitalPin.P8, 1)
-    pins.digitalWritePin(DigitalPin.P2, 1)
-    pins.analogWritePin(AnalogPin.P14, speed)
-    pins.analogWritePin(AnalogPin.P13, speed * -1)
-}
 function Stop () {
     pins.digitalWritePin(DigitalPin.P8, 0)
     pins.digitalWritePin(DigitalPin.P2, 0)
 }
-let speed = 0
+let R_Wheel = 0
+let L_Wheel = 0
 basic.showIcon(IconNames.Pitchfork)
 bluetooth.startLEDService()
-speed = 5
+L_Wheel = 0
+R_Wheel = 0
